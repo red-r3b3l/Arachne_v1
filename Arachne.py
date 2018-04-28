@@ -33,7 +33,7 @@ remoteServer = "127.0.0.1"
 
 def mainmenu():
     print("")
-    print("                      ȺŘAC̳ĤŇE̺ v1.00")
+    print("                      ȺŘAC̳ĤŇE̺ v1.5")
     print("             Developed by MafiaSec Cybersecurity")
     print("                    www.mafiasec.net")
     print("")
