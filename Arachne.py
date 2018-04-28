@@ -10,11 +10,10 @@ from datetime import datetime
 # VARIABLES & TO-DO LIST
 
 #TO-DO List
-#
-# 1. Fix askforscantype menu function
-# 2. Add peripheral functions to SCSAF
+
+# 2. Add peripheral functions
 # 3. OS fingerprinting via Port 0 scans?
-# 4. SCSAF should check open ports against lists of known exploits and return suggestions!!!
+
 
 
 #setting up clearscreen function (which doesnt work :P  )
@@ -30,11 +29,11 @@ fullscan = int("2"),int("3"),int("4"),int("5"),int("7"),int("8"),int("9"),int("1
 #creating empty list to store our open ports in
 openports = []
 vulns = []
-
+remoteServer = "127.0.0.1"
 
 def mainmenu():
     print("")
-    print("                      ARACHNE v1.00")
+    print("                      JORŌGUMO v1.00")
     print("             Developed by MafiaSec Cybersecurity")
     print("                    www.mafiasec.net")
     print("")
@@ -46,6 +45,10 @@ def mainmenu():
     print("6. Curl URL")
     print("7. Create Shell (One-Time)")
     print("8. Create Shell (Scheduled)")
+    print("")
+    print("Please type the corresponding number and press enter.")
+    print("\n")
+    print("")
     promptfor = input()
     if promptfor == "1":
         askforscantype()
@@ -54,12 +57,16 @@ def mainmenu():
 
 
 def askforscantype():
+    clear()
+    print("\n\n")
     print("What type of scan would you like to run?")
     print("")
     print("1. Quick Scan")
     print("2. Full Scan")
     print("")
-    print("Type the corresponding number and press enter:")
+    print("Please type the corresponding number and press enter.")
+    print("\n")
+    print("")
     promptfor = input()
     if promptfor == "1":
         quickscanaskforhost()
@@ -67,8 +74,11 @@ def askforscantype():
         fullscanaskforhost()
 
 def quickscanaskforhost():
-    remoteServer = input("Enter a remote host to scan: ")
+    clear()
+    print("\n")
+    remoteServer = input("Enter a remote host to scan: \n\n")
     remoteServerIP = socket.gethostbyname(remoteServer)
+    clear()
     print("-" * 75)
     print("Please wait, Arachne is beginning quick test scan >>>>>", remoteServerIP)
     print("-" * 75)
@@ -81,7 +91,6 @@ def quickscanaskforhost():
             if result == 0:
                 print("Port {}: $$$$$ Open $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$".format(port))
                 openports.append(port)
-                #vulns.append(port)
             else:
                 print("Port {}: 	 Closed".format(port))
             sock.close()
@@ -99,8 +108,11 @@ def quickscanaskforhost():
     mainmenu()
 
 def fullscanaskforhost():
-    remoteServer = input("Enter a remote host to scan: ")
+    clear()
+    print("\n")
+    remoteServer = input("Enter a remote host to scan: \n\n")
     remoteServerIP = socket.gethostbyname(remoteServer)
+    clear()
     print("-" * 75)
     print("Please wait, Arachne is beginning full port scan >>>>>", remoteServerIP)
     print("-" * 75)
@@ -149,16 +161,27 @@ def vulnreport():
     if 69 in openports:
         vulns.append("TFTP Worm")
     if 110 in openports:
-        vulns.append("pop3_something")
+        vulns.append("pop3_version")
     if 135 in openports:
         vulns.append("Get Hostname from NetBIOS (nbname (Metasploit))")
     if 445 in openports:
         vulns.append("EternalBlue SMB Vulnerability")
         vulns.append("SMB Based Exploits")
     else:
-        print("None.")
-    print("Arachne believes the following vulnerabilities or exploits may be usable:")
+        print("")
+    clear()
+    print("\n\n")
+    print("Arachne suggests you consider the following vulnerabilities or exploits:")
     print(vulns)
+    print("\n\n")
+    print("Press any key to return to the main menu.")
+    i = input()
+    if i == "":
+        clear()
+        mainmenu()
+    else:
+        clear()
+        mainmenu()
 
 
 
