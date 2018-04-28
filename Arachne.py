@@ -22,7 +22,7 @@ clear()
 
 
 #set your scan type values here
-quickscan = int("21"),int("22"),int("23"),int("25"),int("53"),int("110"),int("135"),int("443")
+quickscan = int("21"),int("22"),int("23"),int("25"),int("53"),int("80"),int("110"),int("135"),int("443")
 fullscan = int("2"),int("3"),int("4"),int("5"),int("7"),int("8"),int("9"),int("10"),int("11"),int("12"),int("13"),int("15"),int("16"),int("17"),int("18"),int("19"),int("20"),int("21"),int("22"),int("23"),int("25"),int("27"),int("30"),int("31"),int("34"),int("37"),int("39"),int("41"),int("42"),int("43"),int("44"),int("48"),int("49"),int("50"),int("51"),int("52"),int("53"),int("54"),int("57"),int("58"),int("59"),int("66"),int("67"),int("68"),int("69"),int("70"),int("73"),int("77"),int("79"),int("80"),int("82"),int("85"),int("86"),int("87"),int("88"),int("90"),int("96"),int("97"),int("98"),int("99"),int("101"),int("102"),int("103"),int("105"),int("106"),int("107"),int("109")
 
 #creating empty list to store our open ports in
@@ -31,9 +31,11 @@ vulns = []
 
 def mainmenu():
     print("")
-    print("                      ȺŘAC̳ĤŇE̺ v1.5")
+    print("-" * 71)
+    print("                      ȺŘACĤŇE̺ v1.5")
     print("             Developed by MafiaSec Cybersecurity")
     print("                    www.mafiasec.net")
+    print("-" * 71)
     print("")
     print("1. Port Scan.")
     print("2. Resolve Hostname")
@@ -51,13 +53,39 @@ def mainmenu():
     if promptfor == "1":
         askforscantype()
     if promptfor == "2":
-        vulnreport()
+        hostnameresolver()
+    if promtpfor == "3":
+        dnsreverselookup()
 
+def dnsreverselookup():
+    clear()
+
+
+def hostnameresolver():
+    clear()
+    print("\n\n")
+    print("-" * 71)
+    remoteServer = input("Enter a remote host to resolve: \n" + ("-" * 71) + "\n\n" )
+    remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
+    clear()
+    print("\n\n")
+    print("IP Address: " + remoteServerIP)
+    print("\n\n")
+    print("Press any key to return to the main menu. \n")
+    i = input()
+    if i == "":
+        clear()
+        mainmenu()
+    else:
+        clear()
+        mainmenu()
 
 def askforscantype():
     clear()
     print("\n\n")
+    print("-" * 71)
     print("What type of scan would you like to run?")
+    print("-" * 71)
     print("")
     print("1. Quick Scan")
     print("2. Full Scan")
@@ -74,7 +102,7 @@ def askforscantype():
 def quickscanaskforhost():
     clear()
     print("\n")
-    remoteServer = input("Enter a remote host to scan: \n\n")
+    remoteServer = input("Enter a hostname or IP address to scan: \n\n")
     remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
     print("-" * 71  )
@@ -87,10 +115,10 @@ def quickscanaskforhost():
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((remoteServerIP, port))
             if result == 0:
-                print("Port {}:                                                 $$$$$ Open $$$$$$$".format(port))
+                print("Port {}:                                            $$$$$ Open $$$$$$$".format(port))
                 openports.append(port)
             else:
-                print("Port {}:                                                       Closed".format(port))
+                print("Port {}:                                                 Closed".format(port))
             sock.close()
     except KeyboardInterrupt:
         print("Exit.")
@@ -121,10 +149,10 @@ def fullscanaskforhost():
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((remoteServerIP, port))
             if result == 0:
-                print("Port {}:                                                 $$$$$ Open $$$$$$$".format(port))
+                print("Port {}:                                            $$$$$ Open $$$$$$$".format(port))
                 openports.append(port)
             else:
-                print("Port {}:                                                       Closed".format(port))
+                print("Port {}:                                                 Closed".format(port))
             sock.close()
     except KeyboardInterrupt:
         print("Exit.")
@@ -156,6 +184,10 @@ def vulnreport():
     if 23 in openports:
         vulns.append("Telnet Bruteforce")
         vulns.append("Telnet-Based RAT")
+        vulns.append("SSH MITM (dsniff sshmitm)")
+        vulns.append("telnet_login (Metasploit)")
+        vulns.append("telnet_version (Metasploit)")
+        vulns.append("IP Spoofed Login")
     if 25 in openports:
         vulns.append("smtp_enum (Metasploit)")
         vulns.append("smtp_version (Metasploit)")
@@ -166,6 +198,8 @@ def vulnreport():
         vulns.append("DNS Zone Transfer (AXFR)")
     if 69 in openports:
         vulns.append("TFTP Worm")
+    if 80 in openports:
+        vulns.append("Slowloris DDoS")
     if 110 in openports:
         vulns.append("pop3_version (Metasploit)")
         vulns.append("pop3_login (Metasploit)")
@@ -179,8 +213,10 @@ def vulnreport():
     else:
         print("")
     clear()
-    print("\n\n")
+    print("-" * 71)
     print("Arachne suggests you consider the following vulnerabilities or exploits:")
+    print("-" * 71)
+    print("\n")
     print(vulns)
     print("\n\n")
     print("Press any key to return to the main menu.")
