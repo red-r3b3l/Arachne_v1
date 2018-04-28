@@ -28,7 +28,6 @@ fullscan = int("2"),int("3"),int("4"),int("5"),int("7"),int("8"),int("9"),int("1
 #creating empty list to store our open ports in
 openports = []
 vulns = []
-remoteServer = "127.0.0.1"
 
 def mainmenu():
     print("")
@@ -78,9 +77,9 @@ def quickscanaskforhost():
     remoteServer = input("Enter a remote host to scan: \n\n")
     remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
-    print("-" * 75)
+    print("-" * 71  )
     print("Please wait, Arachne is beginning quick port scan >>>>>", remoteServerIP)
-    print("-" * 75)
+    print("-" * 71)
     print("")
     print("")
     try:
@@ -88,10 +87,10 @@ def quickscanaskforhost():
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((remoteServerIP, port))
             if result == 0:
-                print("Port {}: $$$$$ Open $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$".format(port))
+                print("Port {}:                                                 $$$$$ Open $$$$$$$".format(port))
                 openports.append(port)
             else:
-                print("Port {}: 	 Closed".format(port))
+                print("Port {}:                                                       Closed".format(port))
             sock.close()
     except KeyboardInterrupt:
         print("Exit.")
@@ -112,9 +111,9 @@ def fullscanaskforhost():
     remoteServer = input("Enter a remote host to scan: \n\n")
     remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
-    print("-" * 75)
+    print("-" * 71)
     print("Please wait, Arachne is beginning full port scan >>>>>", remoteServerIP)
-    print("-" * 75)
+    print("-" * 71)
     print("")
     print("")
     try:
@@ -122,10 +121,10 @@ def fullscanaskforhost():
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((remoteServerIP, port))
             if result == 0:
-                print("Port {}: $$$$$ Open $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$".format(port))
+                print("Port {}:                                                 $$$$$ Open $$$$$$$".format(port))
                 openports.append(port)
             else:
-                print("Port {}: 	 Closed".format(port))
+                print("Port {}:                                                       Closed".format(port))
             sock.close()
     except KeyboardInterrupt:
         print("Exit.")
@@ -154,16 +153,26 @@ def vulnreport():
     if 22 in openports:
         vulns.append("Hydra SSH Bruteforce")
         vulns.append("ssh_login (Metasploit)")
+    if 23 in openports:
+        vulns.append("Telnet Bruteforce")
+        vulns.append("Telnet-Based RAT")
     if 25 in openports:
         vulns.append("smtp_enum (Metasploit)")
         vulns.append("smtp_version (Metasploit)")
         vulns.append("Telnet E-mail Spoofing")
+    if 53 in openports:
+        vulns.append("DDoS of DNS")
+        vulns.append("DNS Bruteforce")
+        vulns.append("DNS Zone Transfer (AXFR)")
     if 69 in openports:
         vulns.append("TFTP Worm")
     if 110 in openports:
-        vulns.append("pop3_version")
+        vulns.append("pop3_version (Metasploit)")
+        vulns.append("pop3_login (Metasploit)")
+        vulns.append("libcurl pop3 Buffer Overflow (PoC)")
     if 135 in openports:
         vulns.append("Get Hostname from NetBIOS (nbname (Metasploit))")
+        vulns.append("WinXP/Server 2003 ms03_026_dcom (Metasploit)")
     if 445 in openports:
         vulns.append("EternalBlue SMB Vulnerability")
         vulns.append("SMB Based Exploits")
