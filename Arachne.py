@@ -130,6 +130,18 @@ def fullscanaskforhost():
     print(vulns)
 
 def vulnreport():
+    if 8 in openports:
+        vulns.append("Ping of Death (DDoS)")
+    if 11 in openports:
+        vulns.append("Unix TCP Process Check")
+    if 21 in openports:
+        vulns.append("ftp_login (Metasploit)")
+        vulns.append("ftp/anonymous (Metasploit)")
+        vulns.append("ftp_version (Metasploit)")
+        vulns.append("nmap ftp-brute")
+    if 22 in openports:
+        vulns.append("Hydra SSH Bruteforce")
+        vulns.append("ssh_login (Metasploit)")
     if 25 in openports:
         vulns.append("smtp_enum (Metasploit)")
         vulns.append("smtp_version (Metasploit)")
