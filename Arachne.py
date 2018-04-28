@@ -76,7 +76,7 @@ def quickscanaskforhost():
     clear()
     print("\n")
     remoteServer = input("Enter a remote host to scan: \n\n")
-    remoteServerIP = socket.gethostbyname(remoteServer)
+    remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
     print("-" * 75)
     print("Please wait, Arachne is beginning quick port scan >>>>>", remoteServerIP)
@@ -110,7 +110,7 @@ def fullscanaskforhost():
     clear()
     print("\n")
     remoteServer = input("Enter a remote host to scan: \n\n")
-    remoteServerIP = socket.gethostbyname(remoteServer)
+    remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
     print("-" * 75)
     print("Please wait, Arachne is beginning full port scan >>>>>", remoteServerIP)
@@ -137,8 +137,9 @@ def fullscanaskforhost():
         print("Couldn't connect to server. Socket error.")
         sys.exit()
     print("")
-    print("Scan complete.")
-    print(vulns)
+    print("")
+    vulnreport()
+    mainmenu()
 
 def vulnreport():
     if 8 in openports:
