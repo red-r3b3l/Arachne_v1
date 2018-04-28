@@ -32,7 +32,7 @@ vulns = []
 def mainmenu():
     print("")
     print("-" * 71)
-    print("                      ȺŘACĤŇE̺ v1.5")
+    print("                      ȺŘACĤŇE̺ v2.01")
     print("             Developed by MafiaSec Cybersecurity")
     print("                    www.mafiasec.net")
     print("-" * 71)
@@ -43,8 +43,6 @@ def mainmenu():
     print("4. MX Record Lookup")
     print("5. Check IP Location")
     print("6. Curl URL")
-    print("7. Create Shell (One-Time)")
-    print("8. Create Shell (Scheduled)")
     print("")
     print("Please type the corresponding number and press enter.")
     print("\n")
