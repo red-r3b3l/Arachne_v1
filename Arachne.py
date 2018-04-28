@@ -22,8 +22,7 @@ clear()
 
 
 #set your scan type values here
-testscan = int("25"),int("110")
-quickscan = int("21"),int("22"),int("23"),int("25"),int("53"),int("443"),int("110"),int("135")
+quickscan = int("21"),int("22"),int("23"),int("25"),int("53"),int("110"),int("135"),int("443")
 fullscan = int("2"),int("3"),int("4"),int("5"),int("7"),int("8"),int("9"),int("10"),int("11"),int("12"),int("13"),int("15"),int("16"),int("17"),int("18"),int("19"),int("20"),int("21"),int("22"),int("23"),int("25"),int("27"),int("30"),int("31"),int("34"),int("37"),int("39"),int("41"),int("42"),int("43"),int("44"),int("48"),int("49"),int("50"),int("51"),int("52"),int("53"),int("54"),int("57"),int("58"),int("59"),int("66"),int("67"),int("68"),int("69"),int("70"),int("73"),int("77"),int("79"),int("80"),int("82"),int("85"),int("86"),int("87"),int("88"),int("90"),int("96"),int("97"),int("98"),int("99"),int("101"),int("102"),int("103"),int("105"),int("106"),int("107"),int("109")
 
 #creating empty list to store our open ports in
@@ -80,12 +79,12 @@ def quickscanaskforhost():
     remoteServerIP = socket.gethostbyname(remoteServer)
     clear()
     print("-" * 75)
-    print("Please wait, Arachne is beginning quick test scan >>>>>", remoteServerIP)
+    print("Please wait, Arachne is beginning quick port scan >>>>>", remoteServerIP)
     print("-" * 75)
     print("")
     print("")
     try:
-        for port in testscan:
+        for port in quickscan:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((remoteServerIP, port))
             if result == 0:
