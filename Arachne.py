@@ -53,6 +53,10 @@ def mainmenu():
     if promptfor == "3":
         dnsreverselookup()
 
+
+def mxrecordlookup():
+    print("")
+
 def dnsreverselookup():
     clear()
     print("\n\n")
@@ -222,6 +226,7 @@ def vulnreport():
     else:
         print("")
     clear()
+    print("\n\n")
     print("-" * 71)
     print("Arachne suggests you consider the following vulnerabilities or exploits:")
     print("-" * 71)
