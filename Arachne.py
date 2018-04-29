@@ -33,7 +33,7 @@ vulns = []
 def mainmenu():
     print("")
     print("-" * 71)
-    print("                      ȺŘACĤŇE̺ v4.1")
+    print("                      ȺŘACĤŇE̺ v4.3")
     print("             Developed by MafiaSec Cybersecurity")
     print("                    www.mafiasec.net")
     print("-" * 71)
@@ -214,6 +214,8 @@ def vulnreport():
     if 22 in openports:
         vulns.append("Hydra SSH Bruteforce")
         vulns.append("ssh_login (Metasploit)")
+        vulns.append("ssh_version 'Banner Grabbing' (Metasploit)")
+        vulns.append("Netcat Shell/Reverse Shell")
     if 23 in openports:
         vulns.append("Telnet Bruteforce")
         vulns.append("Telnet-Based RAT")
@@ -225,14 +227,23 @@ def vulnreport():
         vulns.append("smtp_enum (Metasploit)")
         vulns.append("smtp_version (Metasploit)")
         vulns.append("Telnet E-mail Spoofing")
+        vulns.append("Phishing")
+        vulns.append("Spam")
+        vulns.append("E-mail Attachment Virus")
     if 53 in openports:
         vulns.append("DDoS of DNS")
         vulns.append("DNS Bruteforce")
         vulns.append("DNS Zone Transfer (AXFR)")
     if 69 in openports:
         vulns.append("TFTP Worm")
+        vulns.append("FPipe Port Redirect")
+        vulns.append("Netcat Shell/Reverse Shell")
     if 80 in openports:
         vulns.append("Slowloris DDoS")
+        vulns.append("Cross Site Scripting (XSS)")
+        vulns.append("Session/Cookie Hijacking")
+        vulns.append("W3af")
+        vulns.append("Nikto")
     if 110 in openports:
         vulns.append("pop3_version (Metasploit)")
         vulns.append("pop3_login (Metasploit)")
@@ -240,6 +251,7 @@ def vulnreport():
     if 135 in openports:
         vulns.append("Get Hostname from NetBIOS (nbname (Metasploit))")
         vulns.append("WinXP/Server 2003 ms03_026_dcom (Metasploit)")
+        vulns.append("SMB Vulnerabilities")
     if 445 in openports:
         vulns.append("EternalBlue SMB Vulnerability")
         vulns.append("SMB Based Exploits")
