@@ -68,9 +68,6 @@ def urlretrieve():
     urllib.request.urlretrieve(remoteURL, 'py.py')
     print("Check now.")
 
-def mxrecordlookup():
-    print("")
-
 def dnsreverselookup():
     clear()
     print("\n\n")
@@ -133,7 +130,7 @@ def quickscanaskforhost():
     remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
     print("-" * 71  )
-    print("Please wait, Arachne is beginning quick threat scan >>>>>", remoteServerIP)
+    print("Please wait, ȺŘACĤŇE is beginning quick threat scan >>>>>", remoteServerIP)
     print("-" * 71)
     print("")
     print("")
@@ -168,7 +165,7 @@ def fullscanaskforhost():
     remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
     print("-" * 71)
-    print("Please wait, Arachne is beginning full threat scan >>>>>", remoteServerIP)
+    print("Please wait, ȺŘACĤŇE is beginning full threat scan >>>>>", remoteServerIP)
     print("-" * 71)
     print("")
     print("")
@@ -293,7 +290,7 @@ def portquickscanaskforhost():
     remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
     print("-" * 71)
-    print("Please wait, Arachne is beginning quick port scan >>>>>", remoteServerIP)
+    print("Please wait, ȺŘACĤŇE is beginning quick port scan >>>>>", remoteServerIP)
     print("-" * 71)
     print("")
     print("")
@@ -329,7 +326,7 @@ def portfullscanaskforhost():
     remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
     print("-" * 71)
-    print("Please wait, Arachne is beginning full port scan >>>>>", remoteServerIP)
+    print("Please wait, ȺŘACĤŇE is beginning full port scan >>>>>", remoteServerIP)
     print("-" * 71)
     print("")
     print("")
