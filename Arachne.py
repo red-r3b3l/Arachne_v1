@@ -67,18 +67,55 @@ def dnsreverselookup():
     clear()
     print("\n\n")
     print("-" * 71)
-    remoteDNSIP = input("Enter a remote IP to reverse DNS lookup: \n" + ("-" * 71) + "\n\n")
-    print(socket.gethostbyaddr(remoteDNSIP.replace(" ", "")))
-    print("\n\n")
-    print("Press any key to return to the main menu.")
-    i = input()
-    if i == "":
-        clear()
-        mainmenu()
-    else:
-        clear()
-        mainmenu()
+    try:
 
+        remoteDNSIP = input("Enter a remote IP to reverse DNS lookup: \n" + ("-" * 71) + "\n\n")
+        print(socket.gethostbyaddr(remoteDNSIP.replace(" ", "")))
+        print("\n\n")
+        print("Press any key to return to the main menu.")
+        i = input()
+        if i == "":
+            clear()
+            mainmenu()
+        else:
+            clear()
+            mainmenu()
+    except socket.error:
+        print("\n\n")
+        print("Socket error.")
+        print("\n\n")
+        print("Press any key to return to the main menu.")
+        i = input()
+        if i == "":
+            clear()
+            mainmenu()
+        else:
+            clear()
+            mainmenu()
+    except socket.herror:
+        print("\n\n")
+        print("Host not found.")
+        print("\n\n")
+        print("Press any key to return to the main menu.")
+        i = input()
+        if i == "":
+            clear()
+            mainmenu()
+        else:
+            clear()
+            mainmenu()
+    except socket.gaierror:
+        print("\n\n")
+        print("Hostname could not be resolved.")
+        print("\n\n")
+        print("Press any key to return to the main menu.")
+        i = input()
+        if i == "":
+            clear()
+            mainmenu()
+        else:
+            clear()
+            mainmenu()
 
 def hostnameresolver():
     clear()
