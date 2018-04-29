@@ -193,8 +193,16 @@ def fullscanaskforhost():
         sys.exit()
     print("")
     print("")
-    vulnreport()
-    mainmenu()
+    print(openports)
+    print("\n\n")
+    print("Press any key to proceed to the vulnerability report.")
+    i = input()
+    if i == "":
+        clear()
+        vulnreport()
+    else:
+        clear()
+        vulnreport()
 
 def vulnreport():
     if 8 in openports:
@@ -294,7 +302,7 @@ def portquickscanaskforhost():
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((remoteServerIP, port))
             if result == 0:
-                print("Port {}:                                            $$$$$ Open $$$$$$$".format(port))
+                print("Port {}:                                                  Open ".format(port))
                 openports.append(port)
             else:
                 print("Port {}:                                                 Closed".format(port))
@@ -330,7 +338,7 @@ def portfullscanaskforhost():
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((remoteServerIP, port))
             if result == 0:
-                print("Port {}:                                            $$$$$ Open $$$$$$$".format(port))
+                print("Port {}:                                                  Open ".format(port))
                 openports.append(port)
             else:
                 print("Port {}:                                                 Closed".format(port))
