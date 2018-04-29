@@ -207,17 +207,18 @@ def vulnreport():
     if 11 in openports:
         vulns.append("Unix TCP Process Check")
     if 21 in openports:
+        vulns.append("THC-Hydra FTP Bruteforce")
         vulns.append("ftp_login (Metasploit)")
         vulns.append("ftp/anonymous (Metasploit)")
         vulns.append("ftp_version (Metasploit)")
         vulns.append("nmap ftp-brute")
     if 22 in openports:
-        vulns.append("Hydra SSH Bruteforce")
+        vulns.append("THC-Hydra SSH Bruteforce")
         vulns.append("ssh_login (Metasploit)")
         vulns.append("ssh_version 'Banner Grabbing' (Metasploit)")
         vulns.append("Netcat Shell/Reverse Shell")
     if 23 in openports:
-        vulns.append("Telnet Bruteforce")
+        vulns.append("THC-Hydra Telnet Bruteforce")
         vulns.append("Telnet-Based RAT")
         vulns.append("SSH MITM (dsniff sshmitm)")
         vulns.append("telnet_login (Metasploit)")
@@ -244,6 +245,7 @@ def vulnreport():
         vulns.append("Session/Cookie Hijacking")
         vulns.append("W3af")
         vulns.append("Nikto")
+        vulns.append("THC-Hydra HTTP Bruteforce")
     if 110 in openports:
         vulns.append("pop3_version (Metasploit)")
         vulns.append("pop3_login (Metasploit)")
@@ -252,6 +254,9 @@ def vulnreport():
         vulns.append("Get Hostname from NetBIOS (nbname (Metasploit))")
         vulns.append("WinXP/Server 2003 ms03_026_dcom (Metasploit)")
         vulns.append("SMB Vulnerabilities")
+    if 443 in openports:
+        vulns.append("THC-Hydra HTTPS Bruteforce")
+        vulns.append("Heartbleed OpenSSL Error")
     if 445 in openports:
         vulns.append("EternalBlue SMB Vulnerability")
         vulns.append("SMB Based Exploits")
