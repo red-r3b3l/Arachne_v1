@@ -12,6 +12,7 @@ from datetime import datetime
 # 2. Add Shell Function
 # 3. OS Fingerprinting?
 # 4. Add options
+# 5. Check IP Reputation
 
 #setting up clearscreen function
 clear = lambda: os.system('cls')
