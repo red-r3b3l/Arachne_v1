@@ -28,7 +28,7 @@ vulns = []
 def mainmenu():
     print("")
     print("-" * 71)
-    print("                      ȺŘACĤŇE̺ v4.3")
+    print("                      ȺŘACĤŇE̺ v4.4")
     print("             Developed by MafiaSec Cybersecurity")
     print("                    www.mafiasec.net")
     print("-" * 71)
