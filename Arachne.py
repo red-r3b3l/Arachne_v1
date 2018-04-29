@@ -3,7 +3,9 @@ import os
 import socket
 import subprocess
 import sys
+import urllib.request
 from datetime import datetime
+
 
 
 # VARIABLES & TO-DO LIST
@@ -36,23 +38,35 @@ def mainmenu():
     print("                    www.mafiasec.net")
     print("-" * 71)
     print("")
-    print("1. Vulnerability Report")
-    print("2. Resolve Hostname")
-    print("3. DNS Reverse Lookup (Domain from IP)")
-    print("4. Check IP Location")
+    print("1. Port Scan")
+    print("2. Vulnerability Report")
+    print("3. Resolve Hostname")
+    print("4. DNS Reverse Lookup (Domain from IP)")
     print("5. Curl URL")
+    print("6. Options")
     print("")
     print("Please type the corresponding number and press enter.")
     print("\n")
     print("")
     promptfor = input()
     if promptfor == "1":
-        askforscantype()
+        portscan()
     if promptfor == "2":
-        hostnameresolver()
+        threatscan()
     if promptfor == "3":
+        hostnameresolver()
+    if promptfor == "4":
         dnsreverselookup()
+    if promptfor == "5":
+        urlretrieve()
 
+def urlretrieve():
+    clear()
+    print("\n\n")
+    print("-" * 71)
+    remoteURL = input("Enter the internet address to retrieve file from: \n" + ("-" * 71) + "\n\n")
+    urllib.request.urlretrieve(remoteURL, 'py.py')
+    print("Check now.")
 
 def mxrecordlookup():
     print("")
@@ -64,7 +78,7 @@ def dnsreverselookup():
     remoteDNSIP = input("Enter a remote IP to reverse DNS lookup: \n" + ("-" * 71) + "\n\n")
     print(socket.gethostbyaddr(remoteDNSIP))
     print("\n\n")
-    print("Press any key to return to the main menu. \n")
+    print("Press any key to return to the main menu.")
     i = input()
     if i == "":
         clear()
@@ -93,7 +107,7 @@ def hostnameresolver():
         clear()
         mainmenu()
 
-def askforscantype():
+def threatscan():
     clear()
     print("\n\n")
     print("-" * 71)
@@ -119,7 +133,7 @@ def quickscanaskforhost():
     remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
     print("-" * 71  )
-    print("Please wait, Arachne is beginning quick port scan >>>>>", remoteServerIP)
+    print("Please wait, Arachne is beginning quick threat scan >>>>>", remoteServerIP)
     print("-" * 71)
     print("")
     print("")
@@ -128,7 +142,7 @@ def quickscanaskforhost():
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((remoteServerIP, port))
             if result == 0:
-                print("Port {}:                                            $$$$$ Open $$$$$$$".format(port))
+                print("Port {}:                                                  Open".format(port))
                 openports.append(port)
             else:
                 print("Port {}:                                                 Closed".format(port))
@@ -143,6 +157,7 @@ def quickscanaskforhost():
         print("Couldn't connect to server. Socket error.")
         sys.exit()
     print("")
+
     vulnreport()
     mainmenu()
 
@@ -153,7 +168,7 @@ def fullscanaskforhost():
     remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
     clear()
     print("-" * 71)
-    print("Please wait, Arachne is beginning full port scan >>>>>", remoteServerIP)
+    print("Please wait, Arachne is beginning full threat scan >>>>>", remoteServerIP)
     print("-" * 71)
     print("")
     print("")
@@ -162,7 +177,7 @@ def fullscanaskforhost():
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((remoteServerIP, port))
             if result == 0:
-                print("Port {}:                                            $$$$$ Open $$$$$$$".format(port))
+                print("Port {}:                                                  Open ".format(port))
                 openports.append(port)
             else:
                 print("Port {}:                                                 Closed".format(port))
@@ -243,6 +258,114 @@ def vulnreport():
         mainmenu()
 
 
+def portscan():
+    clear()
+    print("\n\n")
+    print("-" * 71)
+    print("What type of scan would you like to run?")
+    print("-" * 71)
+    print("")
+    print("1. Quick Scan")
+    print("2. Full Scan")
+    print("")
+    print("Please type the corresponding number and press enter.")
+    print("\n")
+    print("")
+    promptfor = input()
+    if promptfor == "1":
+        portquickscanaskforhost()
+    elif promptfor == "2":
+        portfullscanaskforhost()
+
+
+def portquickscanaskforhost():
+    clear()
+    print("\n")
+    remoteServer = input("Enter a hostname or IP address to scan: \n\n")
+    remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
+    clear()
+    print("-" * 71)
+    print("Please wait, Arachne is beginning quick port scan >>>>>", remoteServerIP)
+    print("-" * 71)
+    print("")
+    print("")
+    try:
+        for port in quickscan:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            result = sock.connect_ex((remoteServerIP, port))
+            if result == 0:
+                print("Port {}:                                            $$$$$ Open $$$$$$$".format(port))
+                openports.append(port)
+            else:
+                print("Port {}:                                                 Closed".format(port))
+            sock.close()
+    except KeyboardInterrupt:
+        print("Exit.")
+        sys.exit()
+    except socket.gaierror:
+        print('Hostname could not be resolved.')
+        sys.exit()
+    except socket.error:
+        print("Couldn't connect to server. Socket error.")
+        sys.exit()
+    print("")
+    portreport()
+    #    vulnreport()
+    mainmenu()
+
+
+def portfullscanaskforhost():
+    clear()
+    print("\n")
+    remoteServer = input("Enter a remote host to scan: \n\n")
+    remoteServerIP = socket.gethostbyname(remoteServer.replace(" ", ""))
+    clear()
+    print("-" * 71)
+    print("Please wait, Arachne is beginning full port scan >>>>>", remoteServerIP)
+    print("-" * 71)
+    print("")
+    print("")
+    try:
+        for port in fullscan:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            result = sock.connect_ex((remoteServerIP, port))
+            if result == 0:
+                print("Port {}:                                            $$$$$ Open $$$$$$$".format(port))
+                openports.append(port)
+            else:
+                print("Port {}:                                                 Closed".format(port))
+            sock.close()
+    except KeyboardInterrupt:
+        print("Exit.")
+        sys.exit()
+    except socket.gaierror:
+        print('Hostname could not be resolved.')
+        sys.exit()
+    except socket.error:
+        print("Couldn't connect to server. Socket error.")
+        sys.exit()
+    print("")
+    print("")
+    portreport()
+    #    vulnreport()
+    mainmenu()
+
+def portreport():
+    print("\n\n")
+    print("-" * 71)
+    print("The specified target has the following ports open:")
+    print("-" * 71)
+    print("\n")
+    print(openports)
+    print("\n\n")
+    print("Press any key to return to the main menu.")
+    i = input()
+    if i == "":
+        clear()
+        mainmenu()
+    else:
+        clear()
+        mainmenu()
 
 mainmenu()
 
